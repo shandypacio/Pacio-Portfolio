@@ -1,0 +1,239 @@
+#include <iostream>
+#include <fstream>
+#include <bitset>
+#include <unordered_map>
+#include <queue>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+class Node
+{
+public:
+    char data;
+    int frequency;
+    Node* left;
+    Node* right;
+
+    Node(char data, int frequency) : data(data), frequency(frequency), left(nullptr), right(nullptr) {}
+};
+
+class CompareNodes
+{
+public:
+    bool operator()(Node* left, Node* right)
+    {
+        return left->frequency > right->frequency;
+    }
+};
+
+void preOrderTraversalHelper(Node* root, const string& path)
+{
+    if (root == nullptr)
+    {
+        return;
+    }
+    if (root->data != '\0')
+    {
+        cout << "\t\t\t\t" << root->data << ": " << path << endl;
+    }
+
+    preOrderTraversalHelper(root->left, path + "0");
+    preOrderTraversalHelper(root->right, path + "1");
+}
+
+Node* buildHuffmanTree(ifstream& inputFile)
+{
+    priority_queue<Node*, vector<Node*>, CompareNodes> pq;
+
+    int counter = 0;
+    char ch;
+    char x;
+    int frequency;
+    while (inputFile.get(ch))
+        {
+            if (counter % 2 == 0) //if even
+            {
+                x = ch;
+            }
+            else //if odd
+            {
+                frequency = stoi (string (1, ch));
+
+                pq.push(new Node(x, frequency));
+
+                frequency = 0;
+            }
+            counter++;
+        }
+        cout << "\n\n\t\t\tString: " << endl;
+        while (pq.size() > 1)
+        {
+            Node* left = pq.top();
+            pq.pop();
+            Node* right = pq.top();
+            pq.pop();
+            Node* combined = new Node('\0', left->frequency + right->frequency);
+            combined->left = left;
+            combined->right = right;
+
+            pq.push(combined);
+        }
+
+        preOrderTraversalHelper (pq.top(), "");
+
+
+        return pq.top();
+}
+
+int buff(const string& totalZero)
+{
+    ifstream inputFile(totalZero, ios::binary);
+
+    if (!inputFile.is_open())
+    {
+        cout << "\t\t\t- ERROR OPENING INPUT FILE! -" << endl;
+    }
+    int buffer;
+    string y;
+    if (inputFile >> y)
+    {
+        cout << "\n\t\t\tTotal Huffman Binary read from the file: " << y << std::endl;
+        if (y.length() == 1)
+        {
+            buffer= stoi(string(1, y[0]));
+        }
+        else
+        {
+            buffer = stoi (y);
+        }
+    }
+    else
+    {
+        cout << "\t\t\t- ERROR READING CHARACTER FROM FILE! -" << endl;
+    }
+
+    return buffer;
+}
+
+
+string decodeBinaryFile(const string& inputFileName, const string& totalZero, Node *root)
+{
+    ifstream inputFile(inputFileName, ios::binary);
+
+    int buffer = buff(totalZero);
+
+    if (!inputFile.is_open())
+    {
+        cout << "\t\t\t- ERROR OPENING INPUT FILE! -" << endl;
+        return "";
+    }
+
+    string decodedString;
+    char ch;
+    Node* current = root;
+    int charsRead = 0;
+
+    string huffmman;
+
+    cout << "\n\t\t\tCompressed Characters: ";
+    while (inputFile.get(ch))
+    {
+        cout << ch;
+        for (int i = 7; i >= 0; --i)
+        {
+            if (ch & (1 << i))
+            {
+                current = current->right;
+                huffmman+= '1';
+            } else
+            {
+                current = current->left;
+                huffmman+= '0';
+            }
+
+                if (current->left == nullptr && current->right == nullptr)
+                {
+                    current = root;
+                }
+        }
+
+    }
+
+        cout << "\n\n\t\t\tHuffman Binary: " << huffmman << endl;
+        cout<<"\t\t\tLength of Huffman Binary: " << huffmman.length()<<endl;
+
+        current = root;
+
+        for (int i = 0; i < buffer; i++)
+        {
+            if (huffmman[i] == '0')
+        {
+            current = current->left;
+
+            if (current->left == NULL && current->right == NULL)
+            {
+                decodedString += current->data;
+                current = root;
+            }
+        }
+        else if (huffmman[i] == '1')
+        {
+            current = current->right;
+
+            if (current->left == NULL && current->right == NULL)
+            {
+                decodedString += current->data;
+                current = root;
+            }
+        }
+    }
+
+    cout << endl;
+    cout << "\t\t\tDecompressed Text: " << decodedString << endl;
+
+    inputFile.close();
+    return decodedString;
+}
+
+void saveDecodedStringToFile(const string& decodedString, const string& outputFileName)
+{
+    ofstream outputFile(outputFileName);
+
+    if (!outputFile.is_open())
+    {
+        cout << "\t\t\t- ERROR OPENING OUTPUT FILE! -" << endl;
+        return;
+    }
+
+    outputFile << decodedString;
+    outputFile.close();
+}
+
+int main()
+{
+    system("color 70");
+    ifstream treeFile("Huffman_Tree.sna");
+    string totalZero = "Total_Zeroes.sna";
+
+    if (!treeFile.is_open())
+    {
+        cout << "\t\t\t- ERROR OPENING HUFFMAN TREE FILE! -" << endl;
+        return 1;
+    }
+
+    Node *root = buildHuffmanTree(treeFile);
+    treeFile.close();
+
+    string inputFileName = "compressed_output.sna";
+    string outputFileName = "decompressed_output.sna";
+
+    string decodedString = decodeBinaryFile(inputFileName, totalZero, root);
+
+    saveDecodedStringToFile(decodedString, outputFileName);
+
+    cout << "\n\t\t\t- DECOMPRESSED FILE SUCCESSFULLY CREATED! -\n\n" << endl;
+
+    return 0;
+}

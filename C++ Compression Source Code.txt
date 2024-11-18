@@ -1,0 +1,192 @@
+#include <iostream>
+#include <queue>
+#include <unordered_map>
+#include <fstream>
+#include <string>
+#include <bitset>
+
+using namespace std;
+
+class Node
+{
+public:
+    char data;
+    int frequency;
+    Node* left;
+    Node* right;
+
+    Node(char data, int frequency) : data(data), frequency(frequency), left(nullptr), right(nullptr) {}
+};
+
+
+class CompareNodes
+{
+public:
+    bool operator()(Node* a, Node* b)
+    {
+        return a->frequency > b->frequency;
+    }
+};
+
+int computedBuff;
+
+Node* buildHuffmanTree(const unordered_map<char, int>& frequencies)
+{
+    priority_queue<Node*, vector<Node*>, CompareNodes> minHeap;
+
+    for (const auto& entry : frequencies)
+        {
+        minHeap.push(new Node(entry.first, entry.second));
+    }
+
+    while (minHeap.size() > 1)
+        {
+        Node* left = minHeap.top();
+        minHeap.pop();
+        Node* right = minHeap.top();
+        minHeap.pop();
+
+        Node* internalNode = new Node('$', left->frequency + right->frequency);
+        internalNode->left = left;
+        internalNode->right = right;
+
+        minHeap.push(internalNode);
+    }
+
+    return minHeap.top();
+}
+
+void generateHuffmanCodes(Node* root, const string& code, unordered_map<char, string>& huffmanCodes)
+{
+    if (root == nullptr)
+        {
+        return;
+    }
+
+    if (root->data != '$')
+        {
+        huffmanCodes[root->data] = code;
+    }
+
+    generateHuffmanCodes(root->left, code + "0", huffmanCodes);
+    generateHuffmanCodes(root->right, code + "1", huffmanCodes);
+}
+
+string encodeMessage(const string& message, const unordered_map<char, string>& huffmanCodes)
+{
+    string encodedMessage;
+        for (char c : message) {
+        encodedMessage += huffmanCodes.at(c);
+    }
+
+    computedBuff = encodedMessage.size();
+    int paddingSize = (8 - encodedMessage.size() % 8);
+    for (int i = 0; i < paddingSize; ++i)
+        {
+        encodedMessage += '0';
+    }
+    return encodedMessage;
+}
+
+string binaryToDecimal(const string& binary)
+{
+    int decimal = 0;
+    for (int i = 0; i < binary.size(); ++i)
+        {
+        decimal = decimal * 2 + (binary[i] - '0');
+    }
+    return to_string(decimal);
+}
+
+char decimalToAscii(string decimal)
+{
+    return bitset<8>(decimal).to_ulong();
+}
+
+int main()
+{
+    system("color 70");
+    cout << "\n\n";
+    string message = "Algorithm";
+    unordered_map<char, int> frequencies;
+
+    for (char c : message)
+        {
+        frequencies[c]++;
+    }
+
+    Node* root = buildHuffmanTree(frequencies);
+
+    cout << "\t\t\tString: " << message << endl;
+
+    unordered_map<char, string> huffmanCodes;
+    generateHuffmanCodes(root, "", huffmanCodes);
+
+    cout << "\n\t\t\tHuffman Code: \n";
+        for (const auto& entry : huffmanCodes)
+            {
+            cout << "\t\t\t\t\t" << entry.first << ": " << entry.second << endl;
+        }
+        cout << "\n\t\t\tEncoded Binaries: " << encodeMessage(message, huffmanCodes) << endl;
+        cout << "\t\t\tDecimal Equivalent: " << binaryToDecimal(encodeMessage(message, huffmanCodes)) << endl;
+        cout << "\t\t\tLetters and Frequency: ";
+        for (const auto& entry : frequencies)
+        {
+            cout << entry.first << entry.second;
+        }
+
+        ofstream asciiFile("compressed_output.sna");
+        if (asciiFile.is_open())
+            {
+
+            string huff = encodeMessage(message, huffmanCodes);
+            string asciiMessage;
+
+            cout << "\n\n\t\t\tCompressed Characters: ";
+            for (int i = 0; i < huff.length(); i += 8)
+                {
+                string eightChars = huff.substr(i, 8);
+                char asciiCode = decimalToAscii(eightChars);
+                cout  << asciiCode;
+                asciiMessage += asciiCode;
+            }
+
+        asciiFile << asciiMessage;
+        asciiFile.close();
+        }
+        else
+        {
+        cout << "\n\n\t\t\t- UNABLE TO OPEN 'COMPRESSED_OUTPUT' FILE. -" << endl;
+        return 1;
+    }
+
+        ofstream huffmanTree("Huffman_Tree.sna");
+        if (huffmanTree.is_open())
+            {
+            for (const auto& entry : frequencies)
+            {
+                huffmanTree << entry.first << entry.second;
+            }
+            huffmanTree.close();
+        }
+        else
+        {
+            cout << "\n\n\t\t\t- UNABLE TO OPEN 'HUFFMAN_TREE' FILE. -" << endl;
+            return 1;
+        }
+
+        ofstream paddedZero("Total_Zeroes.sna");
+        if (paddedZero.is_open())
+            {
+                paddedZero << computedBuff;
+                paddedZero.close();
+        }
+        else
+         {
+            cout << "\n\n\t\t\t- UNABLE TO OPEN 'TOTAL_ZEROES' FILE. -" << endl;
+            return 1;
+    }
+
+    cout << "\n\n\t\t\t- TEXT FILES WRITTEN SUCCESSFULLY. -\n\n\n" << endl;
+    return 0;
+}
