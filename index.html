@@ -6,50 +6,51 @@
         <title>Shandy Pacio's Portfolio</title>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+        <link href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" rel="stylesheet">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" >
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/styles.css">
     </head>
 </html>
 <body>
-    <div class="container-fluid px-0">
-        
 
-    </head>
-    <body>
-      <div class="container-fluid px-0">
+  <nav class="navbar navbar-expand-lg navbar-light shadow fixed-top bg-white">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">
+        <span class="material-icons-outlined me-1">filter_vintage</span>
+        Shandy Gale
+      </a>
+      <button
+        type="button"
+        class="navbar-toggler"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarcontent"
+        aria-controls="navbarcontent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarcontent">
+        <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
+          <li class="nav-item">
+            <a class="nav-link me-lg-3" href="#home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link me-lg-3" href="#exp">Experience</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link me-lg-3" href="#projects">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link me-lg-3" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-        <nav class="navbar navbar-expand-lg navbar-light shadow">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="/">
-                <span class="material-icons-outlined me-1">filter_vintage</span>
-              Shandy Gale
-            </a>
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarcontent"
-                    aria-controls="navbarcontent" aria-expanded="false" aria-label="Toggle navigation">
-                    
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            <div class="container px-3">
-                <div class="collapse navbar-collapse" id="navbarcontent">
-                    <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link me-lg-3" href="/">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link me-lg-3" href="#exp">Experience</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link me-lg-3" href="#projects">Projects</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link me-lg-3" href="#contact">Contact</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-     </nav>
-        
+  <section id="home">
      <header class="py-5" style="background-color: #e6e9e9;">
             <div class="container px-5">
               <div class="row align-items-center">
@@ -78,7 +79,9 @@
                 </div>
             </div>
         </header>
+      </section>
 
+        <main>
         <section id="about" class="text-center py-5">
             <div class="container py-5">
                 <div class="row justify-content-center">
@@ -113,7 +116,7 @@
                                     <span class="material-icons-outlined m-auto text-warning">favorite</span>
                                   </div>
                                 <h5>Front-end Focus</h5>
-                                <p class="text-muted mb-0"></p>
+                                <p class="text-muted mb-0">
                                 I have experience building responsive web pages using HTML, CSS, and JavaScript, 
                                 with a strong focus on creating intuitive user interfaces.
                                   </p>
@@ -126,7 +129,7 @@
                                     <span class="material-icons-outlined m-auto text-warning">favorite</span>
                                   </div>
                                 <h5>Back-end Focus</h5>
-                                <p class="text-muted mb-0"></p>
+                                <p class="text-muted mb-0">
                                 I have experience developing server-side applications using programming languages like C and C++, 
                                 with a focus on efficient data management and system optimization.
                                   </p>
@@ -148,7 +151,7 @@
                             <div class="col-lg-3 mx-auto mb-15">
                                 <br>
                                 <h5>Programming Tools</h5>
-                                <p class="text-muted mb-0"></p>
+                                <p class="text-muted mb-0">
                                     CodeBlocks, MySQL, Visual Studio Code
                                   </p>
                                   <br>
@@ -157,7 +160,7 @@
                             <div class="col-lg-3 mx-auto mb-15">
                                 <br>
                                 <h5>Web Development</h5>
-                                <p class="text-muted mb-0"></p>
+                                <p class="text-muted mb-0">
                                     HTML, CSS, Bootstrap (currently learning)
                                   </p>
                                   <br>
@@ -166,7 +169,7 @@
                             <div class="col-lg-2 mx-auto mb-15" >
                                 <br>
                                 <h5>Web Hosting</h5>
-                                <p class="text-muted mb-0"></p>
+                                <p class="text-muted mb-0">
                                      GitHub, Netlify
                                   </p>
                                   <br>
@@ -218,7 +221,7 @@
             </section>
 
         <section id="projects" class="text-center py-5">
-            <div class="container py-5"></div>
+            <div class="container py-5">
                 <div class="row justify-content-center">
                     <h2 class="fw-bold">Projects</h2>
                     <p class="lead text-muted mb-5">
@@ -372,26 +375,53 @@
                       </div>
                     </div>
                 </section>
+                
+                <section id="contact" class="text-center py-5">
+                  <div class="container py-5">
+                    <div class="row justify-content-center">
+                      <h2 class="fw-bold">Contact</h2>
+                      <p class="lead text-muted mb-5">
+                        I'm eager to collaborate on projects that challenge my coding abilities 
+                        and help me grow as a developer. Feel free to connect with me for 
+                        opportunities or to discuss all things tech!
+                      </p>
+                    </div>
+                  </div>
+                  <div class="container mb-5">
+                    <div class="row">
+                      <div class="col-xl-5 col-xxl-6 mb-5">
+                        <div id="map"></div>
+                      </div>
+                      <div class="col-lg-8 col-xl-7 col-xxl-6">
+                        <div class="mb-5">
+                          <h6 class="text-uppercase mb-2">Address</h6>
+                          <p class="lead mb-0">Las Pinas City, Philippines</p>
+                        </div>
+                        <div class="mb-5">
+                          <h6 class="text-uppercase mb-2">Phone</h6>
+                          <p class="lead mb-0">+63 921 542 1796</p>
+                        </div>
+                        <div class="mb-5">
+                          <h6 class="text-uppercase mb-2">Email</h6>
+                          <p class="lead mb-0">pro.shandypacio@gmail.com</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+          </main>
+       </div>
+    <hr>
+    <footer class="text-center py-4">
+      <a href="https://github.com/shandypacio" class="fa fa-github" style="color: rgb(248, 218, 44); font-size: 20px; padding: 10px;"></a>
+      <a href="https://www.facebook.com/Shanshandy.gale/" class="fa fa-facebook" style="color: rgb(248, 218, 44); font-size: 20px; padding: 10px;"></a>
+      <a href="https://www.instagram.com/shandypacio/" class="fa fa-instagram" style="color: rgb(248, 218, 44); font-size: 20px; padding: 10px;"></a>
+      <a href="mailto:shandygale@gmail.com" class="fa fa-envelope" style="color: rgb(248, 218, 44); font-size: 20px; padding: 10px;"></a>
+      <div class="container px-5 mb-2">Copyright &copy; 2024 Shandy Gale Pacio</div>
+    </footer>
 
-       <section id="contact" class="text-center py-5">
-            <div class="container py-5">
-                <div class="row justify-content-center">
-                    <h2 class="fw-bold">Contact</h2>
-                        <p class="lead text-muted mb-5">
-                            I'm eager to collaborate on projects that challenge my coding abilities 
-                            and help me grow as a developer. Feel free to connect with me for 
-                            opportunities or to discuss all things tech!
-                        </p>
-                </div>
-            </div>
-       </section>
-
-
-
-
-        <main></main>
-    </div>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" ></script>
     <script src="js/script.js"></script>
-
-</body>
+  </body>
+</html>
