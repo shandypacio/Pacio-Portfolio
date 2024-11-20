@@ -13,79 +13,104 @@
 </html>
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-light shadow fixed-top bg-white">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/">
-        <span class="material-icons-outlined m-auto text-warning">favorite</span>
-        Shandy Gale
-      </a>
-      <button
-        type="button"
-        class="navbar-toggler"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarcontent"
-        aria-controls="navbarcontent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarcontent">
-        <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
-          <li class="nav-item">
-            <a class="nav-link me-lg-3" href="#home">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link me-lg-3" href="#exp">Experience</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link me-lg-3" href="#projects">Projects</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link me-lg-3" href="#contact">Contact</a>
-          </li>
-        </ul>
+  <style>
+  @keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+  }
+  
+  .animated-section {
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+  }
+  </style>
+
+<nav class="navbar navbar-expand-lg navbar-light shadow fixed-top bg-white">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <span class="material-icons-outlined m-auto text-warning">favorite</span>
+      Shandy Gale
+    </a>
+    <button
+      type="button"
+      class="navbar-toggler"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarcontent"
+      aria-controls="navbarcontent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarcontent">
+      <ul class="navbar-nav ms-auto me-4 my-3 my-lg-0">
+        <li class="nav-item">
+          <a class="nav-link me-lg-3" href="#home" data-target="home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link me-lg-3" href="#about" data-target="about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link me-lg-3" href="#projects" data-target="projects">Projects</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link me-lg-3" href="#contact" data-target="contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<section id="home" class="animated-section" style="background-color: #e6e9e9;">
+  <div class="container px-5 py-5">
+        <div class="row align-items-center">
+          <div class="col-lg-8 col-xl-7 col-xxl-6">
+            <div class="my-5">
+              <h2 class="text-center fw-bold mb-2">Mabuhay! I am Shandy Gale,</h2>
+              <h2 class="text-warning text-center fw-bold mb-2">an aspiring Back-end or Front-end Developer</h2>
+              <p class="lead text-center mb-4">
+                I've been learning coding for three years now using C, C++,
+                and Javascript and am currently studying HTML.
+              </p>
+              <div class="d-grid gap-3 d-sm-flex justify-content-center">
+                <a class="btn btn-dark btn-large text-uppercase" href="#about">About Me</a>
+                <a
+                  class="btn btn-warning btn-large text-uppercase"
+                  onclick="window.open('PACIO_CV.pdf')"
+                >
+                  Download CV
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-5 col-xxl-6 justify-content-center">
+            <img
+              class="img-fluid rounded-3 my-5"
+              src="tux.jpeg"
+              alt="Tuxedo Image"
+            />
+          </div>
+        </div>
       </div>
     </div>
-  </nav>
+  </header>
+</section>
 
-  <section id="home">
-     <header class="py-5" style="background-color: #e6e9e9;">
-            <div class="container px-5">
-              <div class="row align-items-center">
-                <div class="col-lg-8 col-xl-7 col-xxl-6">
-                  <div class="my-5">
-                    <h2 class="text-center fw-bold mb-2">Mabuhay! I am Shandy Gale,</h2>
-                    <h2 class="text-warning text-center fw-bold mb-2">an aspiring Back-end or Front-end Developer</h2>
-                    <p class="lead text-center mb-4">
-                        I've been learning coding for three years now using C, C++, 
-                        and Javascript and am currently studying HTML.
-                    </p>
 
-                    <div class="d-grid gap-3 d-sm-flex justify-content-center">
-                        <a class="btn btn-dark btn-large text-uppercase" href="#about">
-                          About Me
-                        </a>
-                        <a class="btn btn-warning btn-large text-uppercase" onclick="window.open('PACIO_CV.pdf')" >
-                            Download CV
-                          </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-5 col-xxl-6 justify-content-center">
-                        <img class="img-fluid rounded-3 my-5" src="tux.jpeg" alt="Tuxedo Image">
-                    </div>
-                </div>
-            </div>
-        </header>
-      </section>
 
         <main>
-        <section id="about" class="text-center py-5">
-            <div class="container py-5">
+          <section id="about" class="animated-section">
+            <div class="container px-5 py-5">
                 <div class="row justify-content-center">
-                    <h2 class="fw-bold">About</h2>
-                    <p class="lead text-muted mb-5">
+                    <h2 class="fw-bold text-center">About</h2>
+                    <p class="lead text-muted mb-5 text-center">
                         <br>
                         Mabuhay! 💛 I'm Shandy Gale P. Pacio a 3rd-year Information Systems student with a passion for web development. 
                         I have experience in C, C++, and JavaScript, and I'm currently expanding my skills by diving 
@@ -101,10 +126,10 @@
               </div>
             </section>
 
-        <section id="exp" class="text-center py-5">
-            <div class="container py-5">
+            <section id="exp" class="animated-section">
+              <div class="container px-5 py-5">
                 <div class="row justify-content-center">
-                    <h2 class="fw-bold">Experience</h2>
+                    <h2 class="text-center fw-bold">Experience</h2>
                     <div class="container mb-5">
                         <br><br>
                         <div class="row">
@@ -219,11 +244,11 @@
               </div>
             </section>
 
-        <section id="projects" class="text-center py-5">
-            <div class="container py-5">
+            <section id="projects" class="animated-section">
+              <div class="container px-5 py-5">
                 <div class="row justify-content-center">
-                    <h2 class="fw-bold">Projects</h2>
-                    <p class="lead text-muted mb-5">
+                    <h2 class="text-center fw-bold">Projects</h2>
+                    <p class="text-center lead text-muted mb-5">
                         Here are my Latest Projects
                     </p>
                 </div>
@@ -370,11 +395,11 @@
                     </div>
                 </section>
                 
-                <section id="contact" class="text-center py-5">
-                  <div class="container py-5">
+                <section id="contact" class="animated-section">
+                  <div class="container px-5 py-5">
                     <div class="row">
-                      <h2 class="fw-bold">Contact</h2>
-                      <p class="lead text-muted mb-5">
+                      <h2 class="text-center fw-bold">Contact</h2>
+                      <p class="text-center lead text-muted mb-5">
                         I'm eager to collaborate on projects that challenge my coding abilities 
                         and help me grow as a developer. Feel free to connect with me for 
                         opportunities or to discuss all things tech!
