@@ -30,13 +30,6 @@ body {
   height: 250px;
 }
 
-.footer-icon {
-  color: rgb(248, 218, 44);
-  font-size: 30px;
-  padding: 5px;
-  text-decoration: none;
-}
-
 .footer-icon:hover {
   color: rgb(200, 180, 44); 
 }
